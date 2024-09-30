@@ -4,8 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
 const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDragOver, onDragEnd }) => {
-
-  const handleTouchStart = (e) => {
+const handleTouchStart = (e) => {
     onDragStart(index); 
   };
 
@@ -19,7 +18,6 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
   const handleTouchEnd = (e) => {
     onDragEnd();
   };
-
   return (
     <div
       key={todo.id}
@@ -46,3 +44,5 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
     </div>
   );
 };
+
+export default TodoItem;
