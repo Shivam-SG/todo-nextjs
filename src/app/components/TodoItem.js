@@ -9,11 +9,11 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
 
   const handleTouchStart = (e) => {
     setTouchStartY(e.touches[0].clientY);
-    onDragStart(index); // Trigger drag start logic
+    onDragStart(index); // Start dragging the item
   };
 
   const handleTouchMove = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default scroll behavior
     const touchCurrentY = e.touches[0].clientY;
 
     // Calculate distance moved and adjust dragging behavior accordingly
@@ -23,6 +23,9 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
     if (todoItemRef.current) {
       todoItemRef.current.style.transform = `translateY(${moveDistance}px)`;
     }
+
+    // Trigger reorder logic when dragging over other items
+    onDragOver(index);
   };
 
   const handleTouchEnd = (e) => {
@@ -30,7 +33,8 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
       // Reset visual movement
       todoItemRef.current.style.transform = "translateY(0px)";
     }
-    onDragEnd(); // Trigger drag end logic
+    // Finalize the drop and reorder
+    onDragEnd();
   };
 
   return (
