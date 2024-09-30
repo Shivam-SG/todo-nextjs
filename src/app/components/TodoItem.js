@@ -1,9 +1,20 @@
-import React from "react";
-import { RxDragHandleDots1 } from "react-icons/rx";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
-
 const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDragOver, onDragEnd }) => {
+
+  const handleTouchStart = (e) => {
+    onDragStart(index); 
+  };
+
+  const handleTouchMove = (e) => {
+    // Prevent default scrolling behavior
+    e.preventDefault();
+    // Similar logic to `onDragOver`
+    onDragOver(index);
+  };
+
+  const handleTouchEnd = (e) => {
+    onDragEnd();
+  };
+
   return (
     <div
       key={todo.id}
@@ -11,6 +22,9 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
       onDragStart={onDragStart}
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
+      onTouchStart={handleTouchStart}  // For touch devices
+      onTouchMove={handleTouchMove}    // For touch devices
+      onTouchEnd={handleTouchEnd}      // For touch devices
       className={`todo-item flex justify-between items-center mb-4 cursor-pointer bg-gray-50 p-2 rounded-md transition-transform ease-in-out duration-200 ${isDragging ? "is-dragging" : ""}`}
     >
       <div className="flex items-center space-x-4">
@@ -27,5 +41,3 @@ const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDr
     </div>
   );
 };
-
-export default TodoItem;
