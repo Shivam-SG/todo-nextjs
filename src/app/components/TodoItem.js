@@ -1,3 +1,8 @@
+import React from "react";
+import { RxDragHandleDots1 } from "react-icons/rx";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+
 const TodoItem = ({ todo, onEdit, onDelete, index, isDragging, onDragStart, onDragOver, onDragEnd }) => {
 
   const handleTouchStart = (e) => {
